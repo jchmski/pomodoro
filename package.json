@@ -1,5 +1,5 @@
 {
-  "name": "Pomodoro",
+  "name": "pomodoro",
   "version": "1.0",
   "description": "Pomodoro",
   "main": "gulpfile.js",
