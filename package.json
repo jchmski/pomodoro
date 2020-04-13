@@ -1,0 +1,23 @@
+{
+  "name": "Pomodoro",
+  "version": "1.0",
+  "description": "Pomodoro",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "babel": "^6.23.0",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^6.0.0",
+    "gulp-phplint": "^0.9.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1"
+  },
+  "dependencies": {}
+}

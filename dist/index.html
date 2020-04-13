@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pomodoro</title>
+
+		<meta charset='utf-8'>
+		<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+		<link rel='stylesheet' href='css/styles.css' type='text/css' />
+		<link rel='shortcut icon' href='images/favicon.ico' type='image/x-icon'>
+		<link rel='icon' href='images/favicon.ico' type='image/x-icon'>
+	</head>
+
+	<body>
+		<div class='container'>
+			<div class='content'>
+				<div class='page-title'>
+					<h1>Pomodoro</h1>
+				</div>
+
+				<div class='timers'>
+					<div>
+						<a rel='pomodoro' class='selected' href='#'>FOCUS</a>
+					</div>
+					<div>
+						<a rel='short_break' href='#'>SHORT BREAK</a>
+					</div>
+					<div>
+						<a rel='long_break' href='#'>LONG BREAK</a>
+					</div>
+				</div>
+
+				<div class='timer'>
+					<div class='pomodoro' data-time='1500' data-orig='25:00'>25:00</div>
+					<div class='short_break' data-time='300' data-orig='5:00'>5:00</div>
+					<div class='long_break' data-time='600' data-orig='10:00'>10:00</div>
+				</div>
+
+				<div class='controls'>
+					<div class='timer_button'>
+						<a href='#'>start timer</a>
+					</div>
+					<!--<div class='stop'>
+						<a href='#'>STOP</a>
+					</div>-->
+					<div class='reset'>
+						<a href='#'>reset</a>
+					</div>
+				</div>
+
+				<footer>
+					<a class='what' href='#'>WHAT IS POMODORO?</a><a class='test-audio' href='#'>TEST AUDIO</a>
+				</footer>
+			</div>
+		</div>
+
+		<div class='what-modal md-effect'>
+			<div class='md-content'>
+				<h1>What is Pomodoro?</h1>
+				<p><a href='http://pomodorotechnique.com/' target='_BLANK'>Pomodoro</a> is a technique used for time management. It's based on the idea that splitting up work with small breaks can reduce mental fatigue and improve overall productivity.</p>
+
+				<h2>The Pomodoro Flow</h2>
+
+				<ol>
+					<li>Work on a task for 25 minutes</li>
+					<li>Take a short, 5 minute break</li>
+					<li>Repeat</li>
+				</ol>
+
+				<p>Every 4th time around, take a longer, 10 minute break</p>
+
+				<aside>Audio courtesy of <a href='http://www.orangefreesounds.com/desk-bell-sound/' target='_BLANK'>Andrew</a></aside>
+
+				<div class='close-modal'><a href='#'>&#215;</a></div>
+			</div>
+		</div>
+
+		<div class='md-overlay'></div>
+
+		<audio>
+			<source src='audio/ding.ogg'></source>
+			<source src='audio/ding.mp3'></source>
+			<source src='audio/ding.wav'></source>
+		</audio>
+
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+		<script src='js/pomodoro.js'></script>
+
+		<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</body>
+</html>

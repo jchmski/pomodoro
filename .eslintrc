@@ -1,0 +1,13 @@
+{
+	"rules": {
+		"no-console": 0,
+		"no-undef": 0,
+		"no-func-assign": 0
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018
+	},
+	"env": {
+		"es6": true
+	}
+}
