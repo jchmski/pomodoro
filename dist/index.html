@@ -96,40 +96,42 @@
 			});
 		});
 
-		timer_links.addEventListener('click', function (e) {
-			e.preventDefault();
+		timer_links.forEach((timer_link) => {
+			timer_link.addEventListener('click', function (e) {
+				e.preventDefault();
 
-			resetTimers();
+				resetTimers();
 
-			if (!timerRunning) {
-				// reset timers if one is at 0
-				timers.forEach((timer) => {
-					if (timer.getAttribute('data-time-left') < 1) {
-						resetTimers();
-					}
-				});
+				if (!timerRunning) {
+					// reset timers if one is at 0
+					timers.forEach((timer) => {
+						if (timer.getAttribute('data-time-left') < 1) {
+							resetTimers();
+						}
+					});
 
-				timer_links.forEach((timer) => {
-					timer.classList.remove('selected');
-				});
+					timer_links.forEach((timer) => {
+						timer.classList.remove('selected');
+					});
 
-				var timers_item = e.target;
+					var timers_item = e.target;
 
-				timers_item.classList.add('selected');
+					timers_item.classList.add('selected');
 
-				var timer_to_show = document.querySelector('.' + timers_item.getAttribute('rel'));
+					var timer_to_show = document.querySelector('.' + timers_item.getAttribute('rel'));
 
-				timers.forEach((timer) => {
-					if (timer === timer_to_show) {
-						timer.classList.add('active');
-					} else {
-						timer.classList.remove('active');
-					}
-				});
-			}
+					timers.forEach((timer) => {
+						if (timer === timer_to_show) {
+							timer.classList.add('active');
+						} else {
+							timer.classList.remove('active');
+						}
+					});
+				}
+			});
 		});
 
-		timer_button.on('click', function (e) {
+		timer_button.addEventListener('click', function (e) {
 			e.preventDefault();
 
 			if (!timerRunning) {
@@ -157,7 +159,7 @@
 			}
 		});
 
-		document.querySelector('.reset > a').on('click', function (e) {
+		document.querySelector('.reset > a').addEventListener('click', function (e) {
 			e.preventDefault();
 			pauseTimer();
 			resetTimers();
@@ -241,7 +243,7 @@
 		}
 
 		function ding() {
-			document.querySelector('audio')[0].play();
+			document.querySelectorAll('audio')[0].play();
 		}
 		</script>
 
