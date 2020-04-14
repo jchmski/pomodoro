@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Noto Sans'), local('NotoSans'), url(https://fonts.gstatic.com/s/notosans/v9/o-0IIpQlx3QUlC5A4PNr5TRA.woff2) format('woff2');
+  src: url(https://fonts.gstatic.com/s/notosans/v9/o-0IIpQlx3QUlC5A4PNr5TRA.woff2) format('woff2');
 }
 
 @font-face {
@@ -11,10 +11,10 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(https://fonts.gstatic.com/s/notosans/v9/o-0NIpQlx3QUlC5A4PNjXhFVZNyB.woff2) format('woff2');
+  src: url(https://fonts.gstatic.com/s/notosans/v9/o-0NIpQlx3QUlC5A4PNjXhFVZNyB.woff2) format('woff2');
 }
 
-$sans-serif: "Noto Sans", Quicksand, Arial, sans-serif;
+$sans-serif: "Noto Sans", Arial, sans-serif;
 
 $red: hsl(357, 82%, 45%);
 $green: hsl(147, 82%, 33%);
