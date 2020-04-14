@@ -90,8 +90,10 @@
 		const timer_links  = document.querySelectorAll('.timer_links a');
 		const timers	   = document.querySelectorAll('.timers > div');
 
-		document.querySelectorAll('.what, .test-audio, .close-modal').addEventListener('click', function (e) {
-			e.preventDefault();
+		document.querySelectorAll('.what, .test-audio, .close-modal').forEach((element) => {
+			element.addEventListener('click', function (e) {
+				e.preventDefault();
+			});
 		});
 
 		timer_links.addEventListener('click', function (e) {
@@ -161,11 +163,13 @@
 			resetTimers();
 		});
 
-		document.querySelectorAll('.what, .md-overlay, .close-modal').on('click', function () {
-			document.querySelector('.what-modal').classList.toggle('md-show');
+		document.querySelectorAll('.what, .md-overlay, .close-modal').forEach((element) => {
+			element.addEventListener('click', function () {
+				document.querySelector('.what-modal').classList.toggle('md-show');
+			});
 		});
 
-		document.querySelector('.test-audio').on('click', function () {
+		document.querySelector('.test-audio').addEventListener('click', function () {
 			ding();
 		});
 
