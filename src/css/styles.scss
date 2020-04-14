@@ -55,7 +55,7 @@ html, body {
 }
 
 
-.timers {
+.timer_links {
 	font-size: 0.8rem;
 
 	> div {
@@ -95,7 +95,7 @@ html, body {
 }
 
 
-.timer {
+.timers {
 	font-variant-numeric: tabular-nums;
 	font-size: 0.4rem;
 	margin-bottom: 0.5em;
@@ -107,14 +107,14 @@ html, body {
 	}
 
 	> div {
+		display: none;
 		font-size: 17.75em;
 		line-height: 1;
+
+		&.active {
+			display: block;
+		}
 	}
-}
-
-
-.long_break, .short_break {
-	display: none;
 }
 
 
@@ -312,18 +312,18 @@ footer {
 
 
 @media all and (min-width: 590px) and (max-height: 580px) {
-	.timers {
+	.timer_links {
 		> div {
 			display: inline-block;
 		}
 	}
 
-	.timers {
+	.timer_links {
 		font-size: .75rem;
 		margin-bottom: 0;
 	}
 
-	.timer {
+	.timers {
 		font-size: 0.6rem;
 		margin-bottom: 1rem !important;
 	}
@@ -352,7 +352,7 @@ footer {
 
 
 @media all and (min-width: 500px) {
-	.timer {
+	.timers {
 		font-size: .6rem;
 	}
 
@@ -363,20 +363,20 @@ footer {
 
 
 @media all and (min-width: 550px) {
-	.timers {
+	.timer_links {
 		> div {
 			display: inline-block;
 		}
 	}
 
-	.timer {
+	.timers {
 		font-size: .75rem;
 	}
 }
 
 
 @media all and (min-width: 700px) {
-	.timers {
+	.timer_links {
 		font-size: 0.9rem;
 
 		a {
@@ -388,11 +388,11 @@ footer {
 
 
 @media all and (min-width: 1000px) and (min-height: 500px) {
-	.timers, .controls {
+	.timer_links, .controls {
 		font-size: 1rem;
 	}
 
-	.timer {
+	.timers {
 		font-size: 0.9rem;
 		margin-bottom: 2rem;
 	}
@@ -400,14 +400,14 @@ footer {
 
 
 @media all and (min-width: 1400px) and (min-height: 700px) {
-	.timer {
+	.timers {
 		font-size: 1rem;
 	}
 }
 
 
 @media all and (max-height: 400px) {
-	.timer {
+	.timers {
 		font-size: .4rem;
 	}
 

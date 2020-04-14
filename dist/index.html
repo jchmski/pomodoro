@@ -19,9 +19,9 @@
 					<h1>Pomodoro</h1>
 				</div>
 
-				<div class='timers'>
+				<div class='timer_links'>
 					<div>
-						<a rel='pomodoro' class='selected' href='#'>FOCUS</a>
+						<a rel='focus' class='selected' href='#'>FOCUS</a>
 					</div>
 					<div>
 						<a rel='short_break' href='#'>SHORT BREAK</a>
@@ -31,8 +31,8 @@
 					</div>
 				</div>
 
-				<div class='timer'>
-					<div class='pomodoro' data-time='1500' data-orig='25:00'>25:00</div>
+				<div class='timers'>
+					<div class='focus active' data-time='1500' data-orig='25:00'>25:00</div>
 					<div class='short_break' data-time='300' data-orig='5:00'>5:00</div>
 					<div class='long_break' data-time='600' data-orig='10:00'>10:00</div>
 				</div>
@@ -41,9 +41,6 @@
 					<div class='timer_button'>
 						<a href='#'>start timer</a>
 					</div>
-					<!--<div class='stop'>
-						<a href='#'>STOP</a>
-					</div>-->
 					<div class='reset'>
 						<a href='#'>reset</a>
 					</div>
@@ -84,88 +81,91 @@
 			<source src='audio/ding.wav'></source>
 		</audio>
 
-		<!-- <script src='https://code.jquery.com/jquery-3.4.1.slim.min.js'></script> -->
 		<script>
-		window.$ = document.querySelectorAll.bind(document);
+		let activeTimer;
+		let timerStarted = false;
+		let timerRunning = false;
 
-		Node.prototype.on = window.on = function (name, fn) {
-			this.addEventListener(name, fn);
-		}
+		const timer_button = document.querySelector('.timer_button > a');
+		const timer_links  = document.querySelectorAll('.timer_links a');
+		const timers	   = document.querySelectorAll('.timers > div');
 
-		NodeList.prototype.__proto__ = Array.prototype;
-
-		NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
-			this.forEach(function (elem, i) {
-				elem.on(name, fn);
-			});
-		}
-
-		var activeTimer;
-		var timerStarted = false;
-		var timerRunning = false;
-
-		$('.what, .test-audio, .close-modal').on('click', function (e) {
+		document.querySelectorAll('.what, .test-audio, .close-modal').addEventListener('click', function (e) {
 			e.preventDefault();
 		});
 
-		$('.timers a').on('click', function (e) {
+		timer_links.addEventListener('click', function (e) {
 			e.preventDefault();
 
 			resetTimers();
 
 			if (!timerRunning) {
 				// reset timers if one is at 0
-				$('.timer > div').each(function () {
-					if ($(this).attr('data-time-left') < 1) {
+				timers.forEach((timer) => {
+					if (timer.getAttribute('data-time-left') < 1) {
 						resetTimers();
 					}
 				});
 
-				$('.timers a').removeClass('selected');
+				timer_links.forEach((timer) => {
+					timer.classList.remove('selected');
+				});
 
-				var $timers_item = $(e.target);
-				$timers_item.addClass('selected');
+				var timers_item = e.target;
 
-				var timer_id = '.' + $timers_item.attr('rel');
+				timers_item.classList.add('selected');
 
-				$('.timer > div').hide();
-				$(timer_id).show();
+				var timer_to_show = document.querySelector('.' + timers_item.getAttribute('rel'));
+
+				timers.forEach((timer) => {
+					if (timer === timer_to_show) {
+						timer.classList.add('active');
+					} else {
+						timer.classList.remove('active');
+					}
+				});
 			}
 		});
 
-		$('.timer_button > a').on('click', function (e) {
+		timer_button.on('click', function (e) {
 			e.preventDefault();
 
 			if (!timerRunning) {
-				var $timer_span = $('.timer > div').filter(':visible');
+				var timer_span = null;
+
+				timers.forEach((timer) => {
+					if (timer.classList.contains('active')) {
+						timer_span = timer;
+					}
+				});
 
 				var duration;
 
 				// use "time-left" if timer hasn't been reset
-				if ($timer_span.attr('data-time-left') > 0) {
-					duration = $timer_span.attr('data-time-left');
+				if (timer_span.getAttribute('data-time-left') > 0) {
+					duration = timer_span.getAttribute('data-time-left');
 				} else {
 					resetTimers();
-					duration = $timer_span.attr('data-time') - 1;
+					duration = timer_span.getAttribute('data-time') - 1;
 				}
 
-				startTimer(duration, $timer_span);
+				startTimer(duration, timer_span);
 			} else {
 				pauseTimer();
 			}
 		});
 
-		$('.reset > a').on('click', function (e) {
+		document.querySelector('.reset > a').on('click', function (e) {
 			e.preventDefault();
 			pauseTimer();
 			resetTimers();
 		});
 
-		$('.what, .md-overlay, .close-modal').on('click', function () {
-			$('.what-modal').toggleClass('md-show');
+		document.querySelectorAll('.what, .md-overlay, .close-modal').on('click', function () {
+			document.querySelector('.what-modal').classList.toggle('md-show');
 		});
 
-		$('.test-audio').on('click', function () {
+		document.querySelector('.test-audio').on('click', function () {
 			ding();
 		});
 
@@ -178,9 +178,9 @@
 
 				seconds = seconds < 10 ? "0" + seconds : seconds;
 
-				document.title = 'Pomodoro (' + minutes + ':' + seconds + ')';
-				timer_span.text(minutes + ':' + seconds);
-				timer_span.attr('data-time-left', timer);
+				document.title = '' + minutes + ':' + seconds + ' - Pomodoro';
+				timer_span.textContent = minutes + ':' + seconds;
+				timer_span.setAttribute('data-time-left', timer);
 
 				if (--timer < 0) {
 					resetTimers();
@@ -210,8 +210,11 @@
 
 		// resets all timers to original positions
 		function resetTimers() {
-			$('.timer > div').each(function () {
-				$(this).removeAttr('data-time-left').text($(this).attr('data-orig'));
+			document.title = 'Pomodoro';
+
+			timers.forEach((timer) => {
+				timer.removeAttribute('data-time-left');
+				timer.textContent = timer.getAttribute('data-orig');
 			});
 
 			window.clearInterval(activeTimer);
@@ -225,15 +228,16 @@
 		function showButton(toggleVal) {
 			if (toggleVal === 'start') {
 				const textStr = (timerStarted) ? 'resume timer' : 'start timer';
-
-				$('.timer_button > a').removeClass('running').text(textStr);
+				timer_button.classList.remove('running');
+				timer_button.textContent = textStr;
 			} else if (toggleVal === 'pause') {
-				$('.timer_button > a').addClass('running').text('pause timer');
+				timer_button.classList.add('running');
+				timer_button.textContent = ('pause timer');
 			}
 		}
 
 		function ding() {
-			$('audio')[0].play();
+			document.querySelector('audio')[0].play();
 		}
 		</script>
 
