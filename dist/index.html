@@ -104,71 +104,69 @@
 		var timerStarted = false;
 		var timerRunning = false;
 
-		$(document).ready(function () {
-			$('.what, .test-audio, .close-modal').on('click', function (e) {
-				e.preventDefault();
-			});
+		$('.what, .test-audio, .close-modal').on('click', function (e) {
+			e.preventDefault();
+		});
 
-			$('.timers a').on('click', function (e) {
-				e.preventDefault();
+		$('.timers a').on('click', function (e) {
+			e.preventDefault();
 
-				resetTimers();
+			resetTimers();
 
-				if (!timerRunning) {
-					// reset timers if one is at 0
-					$('.timer > div').each(function () {
-						if ($(this).attr('data-time-left') < 1) {
-							resetTimers();
-						}
-					});
-
-					$('.timers a').removeClass('selected');
-
-					var $timers_item = $(e.target);
-					$timers_item.addClass('selected');
-
-					var timer_id = '.' + $timers_item.attr('rel');
-
-					$('.timer > div').hide();
-					$(timer_id).show();
-				}
-			});
-
-			$('.timer_button > a').on('click', function (e) {
-				e.preventDefault();
-
-				if (!timerRunning) {
-					var $timer_span = $('.timer > div').filter(':visible');
-
-					var duration;
-
-					// use "time-left" if timer hasn't been reset
-					if ($timer_span.attr('data-time-left') > 0) {
-						duration = $timer_span.attr('data-time-left');
-					} else {
+			if (!timerRunning) {
+				// reset timers if one is at 0
+				$('.timer > div').each(function () {
+					if ($(this).attr('data-time-left') < 1) {
 						resetTimers();
-						duration = $timer_span.attr('data-time') - 1;
 					}
+				});
 
-					startTimer(duration, $timer_span);
+				$('.timers a').removeClass('selected');
+
+				var $timers_item = $(e.target);
+				$timers_item.addClass('selected');
+
+				var timer_id = '.' + $timers_item.attr('rel');
+
+				$('.timer > div').hide();
+				$(timer_id).show();
+			}
+		});
+
+		$('.timer_button > a').on('click', function (e) {
+			e.preventDefault();
+
+			if (!timerRunning) {
+				var $timer_span = $('.timer > div').filter(':visible');
+
+				var duration;
+
+				// use "time-left" if timer hasn't been reset
+				if ($timer_span.attr('data-time-left') > 0) {
+					duration = $timer_span.attr('data-time-left');
 				} else {
-					pauseTimer();
+					resetTimers();
+					duration = $timer_span.attr('data-time') - 1;
 				}
-			});
 
-			$('.reset > a').on('click', function (e) {
-				e.preventDefault();
+				startTimer(duration, $timer_span);
+			} else {
 				pauseTimer();
-				resetTimers();
-			});
+			}
+		});
 
-			$('.what, .md-overlay, .close-modal').on('click', function () {
-				$('.what-modal').toggleClass('md-show');
-			});
+		$('.reset > a').on('click', function (e) {
+			e.preventDefault();
+			pauseTimer();
+			resetTimers();
+		});
 
-			$('.test-audio').on('click', function () {
-				ding();
-			});
+		$('.what, .md-overlay, .close-modal').on('click', function () {
+			$('.what-modal').toggleClass('md-show');
+		});
+
+		$('.test-audio').on('click', function () {
+			ding();
 		});
 
 		function startTimer(duration, timer_span) {
