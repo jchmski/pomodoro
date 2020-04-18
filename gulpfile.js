@@ -1,25 +1,30 @@
-// npm install browser-sync gulp gulp-autoprefixer gulp-eslint gulp-sass gulp-watch gulp-concat @babel/core babel gulp-babel @babel/preset-env @babel/polyfill gulp-uglify gulp-phplint --save-dev
-
 var gulp = require('gulp'),
-    browserSync = require('browser-sync'),
-    sass = require('gulp-sass'),
-    watch = require('gulp-watch'),
+	browserSync = require('browser-sync'),
+	sass = require('gulp-sass'),
+	inject = require('gulp-style-inject'),
+	htmlmin = require('gulp-htmlmin'),
     babel = require('gulp-babel'),
     eslint = require('gulp-eslint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    autoprefixer = require('gulp-autoprefixer'),
-    phplint = require('gulp-phplint');
+    autoprefixer = require('gulp-autoprefixer');
 
 
 gulp.task('browser-sync', function() {
 	browserSync.init({
-		proxy: 'pomodoro.local'
+		proxy: 'pomodoro.local',
+		open: false
 	});
 
-	gulp.watch('./src/css/*.scss', gulp.series('css'));
-	gulp.watch('./src/js/*.js', gulp.series('js'));
-	gulp.watch('./src/**/*.php', gulp.series('php'));
+	gulp.watch('./src/index.html', gulp.series('copy', 'bundle'));
+	gulp.watch('./src/css/*.scss', gulp.series('copy', 'css', 'bundle'));
+	gulp.watch('./src/js/*.js', gulp.series('copy', 'js', 'bundle'));
+});
+
+
+gulp.task('copy', function() {
+	return gulp.src('./src/index.html')
+	.pipe(gulp.dest('./src/packaged/'))
 });
 
 
@@ -36,61 +41,57 @@ gulp.task('css', function() {
           console.log(e)
           this.emit('end')
       })
-      .pipe(gulp.dest('./dist/css/'))
+      .pipe(gulp.dest('./src/packaged/css/'))
       .pipe(browserSync.stream());
 });
 
 
-gulp.task('js', function() {
-  return gulp.src('./src/js/*.js')
-     /* .pipe(sourcemaps.init())*/
-      .pipe(babel())
-      .on('error', function(e) {
-          console.log(e)
-          this.emit('end')
-      })
-      .pipe(eslint({baseConfig: {extends: 'eslint:recommended'}}))
-      .pipe(eslint.format())
-      .on('error', function(e) {
-          console.log(e)
-          this.emit('end')
-      })
-      .pipe(concat('pomodoro.js'))
-      .pipe(uglify())
-      .pipe(gulp.dest('./dist/js/'))
-      .pipe(browserSync.stream());
+gulp.task('js', function () {
+	return gulp.src('./src/js/*.js')
+		.pipe(babel())
+		.on('error', function (e) {
+			console.log(e)
+			this.emit('end')
+		})
+		.pipe(eslint({ baseConfig: { extends: 'eslint:recommended' } }))
+		.pipe(eslint.format())
+		.on('error', function (e) {
+			console.log(e)
+			this.emit('end')
+		})
+		.pipe(concat('pomodoro.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('./src/packaged/js/'))
+		.pipe(browserSync.stream());
 });
 
 
-gulp.task('lint', function() {
-  return gulp.src('./src/js/*.js')
-      .pipe(eslint())
-      .pipe(eslint.format())
-      .pipe(eslint.failAfterError());
+gulp.task('inline-css', function() {
+	return gulp.src('./src/packaged/index.html')
+		.pipe(inject())
+		.pipe(gulp.dest('./src/packaged/'))
+		.pipe(browserSync.stream());
 });
 
 
-gulp.task('phplint', function() {
-  return gulp.src(['./src/includes/*.php'])
-    .pipe(phplint());
+gulp.task('inline-js', function () {
+	return gulp.src('./src/packaged/index.html')
+		.pipe(inject({
+			match_pattern: '<\\!--\\s*inject-javascript\\s*(.*?)\\s*-->',
+			tag: 'script'
+		}))
+		.pipe(gulp.dest('./src/packaged/'))
+		.pipe(browserSync.stream());
 });
 
 
-gulp.task('php', gulp.series('phplint', function() {
-  return gulp.src('./src/includes/*.php')
-    .pipe(concat('functions.php'))
-    .pipe(gulp.dest('./dist/includes/'));
-}));
-
-
-gulp.task('images', function() {
-  gulp.src('./dist/images/**/')
-  .pipe(imagemin([
-    mozjpeg({ quality: '85' }),
-    pngquant({ quality: '100' })
-  ]))
-  .pipe(gulp.dest('./dist/images-compressed'));
+gulp.task('htmlmin', function () {
+	return gulp.src('./src/packaged/index.html')
+		.pipe(htmlmin({ collapseWhitespace: true }))
+		.pipe(gulp.dest('./dist/'))
+		.pipe(browserSync.stream());
 });
 
 
 gulp.task('default', gulp.series('browser-sync'));
+gulp.task('bundle', gulp.series('inline-css', 'inline-js', 'htmlmin'));
