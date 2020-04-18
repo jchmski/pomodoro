@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function() => {
+window.addEventListener('load', () => {
 	let activeTimer;
 	let timerStarted = false;
 	let timerRunning = false;
@@ -8,13 +8,13 @@ window.addEventListener('DOMContentLoaded', function() => {
 	const timers = document.querySelectorAll('.timers > div');
 
 	document.querySelectorAll('.what, .test-audio, .close-modal').forEach((element) => {
-		element.addEventListener('click', function (e) {
+		element.addEventListener('click', (e) => {
 			e.preventDefault();
 		});
 	});
 
 	timer_links.forEach((timer_link) => {
-		timer_link.addEventListener('click', function (e) {
+		timer_link.addEventListener('click', (e) => {
 			e.preventDefault();
 
 			resetTimers();
@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', function() => {
 		});
 	});
 
-	timer_button.addEventListener('click', function (e) {
+	timer_button.addEventListener('click', (e) => {
 		e.preventDefault();
 
 		if (!timerRunning) {
@@ -76,26 +76,26 @@ window.addEventListener('DOMContentLoaded', function() => {
 		}
 	});
 
-	document.querySelector('.reset > a').addEventListener('click', function (e) {
+	document.querySelector('.reset > a').addEventListener('click', (e) => {
 		e.preventDefault();
 		pauseTimer();
 		resetTimers();
 	});
 
 	document.querySelectorAll('.what, .md-overlay, .close-modal').forEach((element) => {
-		element.addEventListener('click', function () {
+		element.addEventListener('click', () => {
 			document.querySelector('.what-modal').classList.toggle('md-show');
 		});
 	});
 
-	document.querySelector('.test-audio').addEventListener('click', function () {
+	document.querySelector('.test-audio').addEventListener('click', () => {
 		ding();
 	});
 
 	function startTimer(duration, timer_span) {
 		var timer = duration, minutes, seconds;
 
-		activeTimer = setInterval(function () {
+		activeTimer = setInterval(() => {
 			minutes = parseInt(timer / 60, 10)
 			seconds = parseInt(timer % 60, 10);
 
