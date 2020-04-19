@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
 	let activeTimer;
 	let timerStarted = false;
 	let timerRunning = false;
