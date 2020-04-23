@@ -1,14 +1,13 @@
 var gulp = require('gulp'),
-	browserSync = require('browser-sync'),
-	sass = require('gulp-sass'),
-	inject = require('gulp-style-inject'),
-	htmlmin = require('gulp-htmlmin'),
-	babel = require('gulp-babel'),
-	eslint = require('gulp-eslint'),
-	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
-	autoprefixer = require('gulp-autoprefixer');
-
+browserSync = require('browser-sync'),
+sass = require('gulp-sass'),
+inject = require('gulp-style-inject'),
+htmlmin = require('gulp-htmlmin'),
+babel = require('gulp-babel'),
+eslint = require('gulp-eslint'),
+concat = require('gulp-concat'),
+uglify = require('gulp-uglify'),
+autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('browser-sync', function() {
 	browserSync.init({
@@ -21,12 +20,10 @@ gulp.task('browser-sync', function() {
 	gulp.watch('./src/js/*.js', gulp.series('copy', 'js', 'bundle'));
 });
 
-
 gulp.task('copy', function() {
 	return gulp.src('./src/index.html')
 	.pipe(gulp.dest('./src/packaged/'))
 });
-
 
 gulp.task('css', function() {
   return gulp.src('./src/css/*.scss')
@@ -44,7 +41,6 @@ gulp.task('css', function() {
       .pipe(gulp.dest('./src/packaged/css/'))
       .pipe(browserSync.stream());
 });
-
 
 gulp.task('js', function () {
 	return gulp.src('./src/js/*.js')
@@ -65,14 +61,12 @@ gulp.task('js', function () {
 		.pipe(browserSync.stream());
 });
 
-
 gulp.task('inline-css', function() {
 	return gulp.src('./src/packaged/index.html')
 		.pipe(inject())
 		.pipe(gulp.dest('./src/packaged/'))
 		.pipe(browserSync.stream());
 });
-
 
 gulp.task('inline-js', function () {
 	return gulp.src('./src/packaged/index.html')
@@ -84,14 +78,12 @@ gulp.task('inline-js', function () {
 		.pipe(browserSync.stream());
 });
 
-
 gulp.task('htmlmin', function () {
 	return gulp.src('./src/packaged/index.html')
 		.pipe(htmlmin({ collapseWhitespace: true }))
 		.pipe(gulp.dest('./dist/'))
 		.pipe(browserSync.stream());
 });
-
 
 gulp.task('default', gulp.series('browser-sync'));
 gulp.task('bundle', gulp.series('inline-css', 'inline-js', 'htmlmin'));
