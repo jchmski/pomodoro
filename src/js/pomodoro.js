@@ -110,10 +110,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 				ding();
 
-				document.querySelector('.timer').classList.add('shaking');
+				document.querySelector('.timers > div.active').classList.add('shaking');
 
 				setTimeout(() => {
-					document.querySelector('.timer').classList.remove('shaking');
+					document.querySelector('.timers > div.active').classList.add('shaking');
 				}, 684); // matches CSS: 38ms per animation cycle * 15 cycles
 			}
 		}, 1000);

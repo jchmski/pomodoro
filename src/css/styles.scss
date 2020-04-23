@@ -103,7 +103,7 @@ body {
 	margin: -0.25rem 0 0.5em;
 	overflow: hidden;
 
-	&.shaking {
+	& div.shaking {
 		animation: 38ms shake 18;
 		transform: rotate(-1deg);
 	}
