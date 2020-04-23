@@ -1,5 +1,5 @@
 # Pomodoro
-It's tomato-based time management!
+Tomato-based time management!
 
 https://pomodoro.rocks
 
