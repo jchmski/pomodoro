@@ -92,7 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		ding();
 	});
 
-	function startTimer(duration, timer_span) {
+	const startTimer = (duration, timer_span) => {
 		var timer = duration, minutes, seconds;
 
 		activeTimer = setInterval(() => {
@@ -124,7 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		showButton('pause');
 	}
 
-	function pauseTimer() {
+	const pauseTimer = () => {
 		window.clearInterval(activeTimer);
 		timerRunning = false;
 
@@ -132,7 +132,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// resets all timers to original positions
-	function resetTimers() {
+	const resetTimers = () => {
 		document.title = 'Pomodoro';
 
 		timers.forEach((timer) => {
@@ -148,7 +148,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		showButton('start');
 	}
 
-	function showButton(toggleVal) {
+	const showButton = (toggleVal) => {
 		if (toggleVal === 'start') {
 			const textStr = (timerStarted) ? 'resume timer' : 'start timer';
 			timer_button.classList.remove('running');
@@ -159,7 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	function ding() {
+	const ding = () => {
 		document.querySelectorAll('audio')[0].play();
 	}
 });
