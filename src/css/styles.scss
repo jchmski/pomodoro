@@ -299,6 +299,13 @@ footer {
 	}
 }
 
+.github-link {
+	position: fixed;
+	bottom: 15px;
+	right: 18px;
+	display: block;
+}
+
 @media all and (min-width: 590px) and (max-height: 580px) {
 	.timer_links {
 		> div {
