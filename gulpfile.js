@@ -3,11 +3,11 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	inject = require('gulp-style-inject'),
 	htmlmin = require('gulp-htmlmin'),
-    babel = require('gulp-babel'),
-    eslint = require('gulp-eslint'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    autoprefixer = require('gulp-autoprefixer');
+	babel = require('gulp-babel'),
+	eslint = require('gulp-eslint'),
+	concat = require('gulp-concat'),
+	uglify = require('gulp-uglify'),
+	autoprefixer = require('gulp-autoprefixer');
 
 
 gulp.task('browser-sync', function() {
