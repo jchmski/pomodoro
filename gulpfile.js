@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
 browserSync = require('browser-sync'),
 sass = require('gulp-sass'),
-inject = require('gulp-style-inject'),
+inject = require('gulp-inline-code'),
 htmlmin = require('gulp-htmlmin'),
 babel = require('gulp-babel'),
 eslint = require('gulp-eslint'),
@@ -63,7 +63,10 @@ gulp.task('js', function () {
 
 gulp.task('inline-css', function() {
 	return gulp.src('./src/packaged/index.html')
-		.pipe(inject())
+		.pipe(inject({
+			type: 'css',
+			path: './src/packaged/css/styles.css'
+		}))
 		.pipe(gulp.dest('./src/packaged/'))
 		.pipe(browserSync.stream());
 });
@@ -71,8 +74,8 @@ gulp.task('inline-css', function() {
 gulp.task('inline-js', function () {
 	return gulp.src('./src/packaged/index.html')
 		.pipe(inject({
-			match_pattern: '<\\!--\\s*inject-javascript\\s*(.*?)\\s*-->',
-			tag: 'script'
+			type: 'js',
+			path: './src/packaged/js/pomodoro.js'
 		}))
 		.pipe(gulp.dest('./src/packaged/'))
 		.pipe(browserSync.stream());
