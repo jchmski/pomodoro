@@ -1,4 +1,5 @@
-# 🍅 Pomodoro
+# Pomodoro
+It's tomato-based time management! 🍅
 https://pomodoro.rocks
 
 ## What is Pomodoro?
