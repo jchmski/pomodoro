@@ -1,4 +1,4 @@
-# Pomodoro!
+# 🍅 Pomodoro
 https://pomodoro.rocks
 
 ## What is Pomodoro?
