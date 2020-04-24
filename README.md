@@ -17,6 +17,6 @@ Audio file is courtesy of [Andrew](http://www.orangefreesounds.com/desk-bell-sou
 ## Site Performance
 This site is fast! There is a small amount of CSS and javascript which are inlined in the `index.html` file in order to avoid extra roundtrips to download the resources.
 
-I re-worked a gulp plugin [gulp-inline-code](https://github.com/jchmski/gulp-inline-code) — forked from [gulp-style-inject](https://github.com/vladfilipro/gulp-style-inject) — which automatically inlines the CSS and JS, then `gulp-htmlmin` goes to work to minify the final html file for maximum size savings. And with Netlify's lightning quick network, you can't go wrong!
+I forked a style inject plugin — [gulp-style-inject](https://github.com/vladfilipro/gulp-style-inject) — and re-factored it to make [gulp-inline-code](https://github.com/jchmski/gulp-inline-code) which automatically inlines minified CSS and JS files, then `gulp-htmlmin` goes to work to minify the final html file for maximum size savings. Coupled with Netlify's lightning quick network, you can't go wrong!
 
 ![web.dev test](https://res.cloudinary.com/jchmski/image/upload/v1587697642/Github/Pomodoro/Annotation_2020-04-23_230712_odcspu.jpg)
