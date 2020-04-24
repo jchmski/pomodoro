@@ -90,3 +90,4 @@ gulp.task('htmlmin', function () {
 
 gulp.task('default', gulp.series('browser-sync'));
 gulp.task('bundle', gulp.series('inline-css', 'inline-js', 'htmlmin'));
+gulp.task('build', gulp.series('copy', 'inline-css', 'inline-js', 'htmlmin'));
