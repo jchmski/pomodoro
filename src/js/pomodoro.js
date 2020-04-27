@@ -3,9 +3,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	let timerStarted = false;
 	let timerRunning = false;
 
-	const timer_button = document.querySelector('.timer_button > a');
-	const timer_links = document.querySelectorAll('.timer_links a');
-	const timers = document.querySelectorAll('.timers > div');
+	const timer_button = document.querySelector('.timer-button > a');
+	const timer_options = document.querySelectorAll('.timer-options a');
+	const timers = document.querySelectorAll('.timer > div');
 
 	document.querySelectorAll('.what, .test-audio, .close-modal').forEach((element) => {
 		element.addEventListener('click', (e) => {
@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
-	timer_links.forEach((timer_link) => {
+	timer_options.forEach((timer_link) => {
 		timer_link.addEventListener('click', (e) => {
 			e.preventDefault();
 
@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					}
 				});
 
-				timer_links.forEach((timer) => {
+				timer_options.forEach((timer) => {
 					timer.classList.remove('selected');
 				});
 
@@ -110,10 +110,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 				ding();
 
-				document.querySelector('.timers > div.active').classList.add('shaking');
+				document.querySelector('.timer > div.active').classList.add('shaking');
 
 				setTimeout(() => {
-					document.querySelector('.timers > div.active').classList.add('shaking');
+					document.querySelector('.timer > div.active').classList.add('shaking');
 				}, 684); // matches CSS: 38ms per animation cycle * 15 cycles
 			}
 		}, 1000);
