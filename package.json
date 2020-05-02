@@ -1,6 +1,6 @@
 {
   "name": "pomodoro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pomodoro",
   "main": "gulpfile.js",
   "devDependencies": {
@@ -10,13 +10,13 @@
     "babel": "^6.23.0",
     "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
-	"gulp-autoprefixer": "^7.0.1",
-	"gulp-uglify": "^3.0.2",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^6.0.0",
     "gulp-htmlmin": "^5.0.1",
+    "gulp-inject-code": "github:jchmski/gulp-inject-code",
     "gulp-sass": "^4.0.2",
-    "gulp-inline-code": "git+https://github.com/jchmski/gulp-inline-code.git"
+    "gulp-uglify": "^3.0.2"
   }
 }

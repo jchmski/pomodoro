@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
 browserSync = require('browser-sync'),
 sass = require('gulp-sass'),
-inject = require('gulp-inline-code'),
+inject = require('gulp-inject-code'),
 htmlmin = require('gulp-htmlmin'),
 babel = require('gulp-babel'),
 eslint = require('gulp-eslint'),
@@ -61,7 +61,7 @@ gulp.task('js', function () {
 		.pipe(browserSync.stream());
 });
 
-gulp.task('inline-css', function() {
+gulp.task('inject-css', function() {
 	return gulp.src('./src/packaged/index.html')
 		.pipe(inject({
 			type: 'css',
@@ -71,7 +71,7 @@ gulp.task('inline-css', function() {
 		.pipe(browserSync.stream());
 });
 
-gulp.task('inline-js', function () {
+gulp.task('inject-js', function () {
 	return gulp.src('./src/packaged/index.html')
 		.pipe(inject({
 			type: 'js',
@@ -89,5 +89,5 @@ gulp.task('htmlmin', function () {
 });
 
 gulp.task('default', gulp.series('browser-sync'));
-gulp.task('bundle', gulp.series('inline-css', 'inline-js', 'htmlmin'));
-gulp.task('build', gulp.series('copy', 'inline-css', 'inline-js', 'htmlmin'));
+gulp.task('bundle', gulp.series('inject-css', 'inject-js', 'htmlmin'));
+gulp.task('build', gulp.series('copy', 'inject-css', 'inject-js', 'htmlmin'));
